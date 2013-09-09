@@ -1,0 +1,12 @@
+<h1><%= @user.name %>'s Most Recent Tweets</h1>
+<h2>@<%= @user.handle %></h2>
+<p>A proud Twitter user since <%= @user.twitter_birthday.month %>/<%= @user.twitter_birthday.day %>/<%= @user.twitter_birthday.year %>
+<p><%= @user.name %> has <%= @user.followers_count %> followers! Wow!</p>
+<hr>
+
+<% @user_timeline.each do |tweet| %>
+  <p><%= tweet.text %>
+    <strong><%= tweet.print_date %> <%= tweet.print_time %></strong>
+  </p>
+
+<% end %>
