@@ -4,8 +4,8 @@ end
 
 get '/tweets/:handle' do
   @user = TwitterUser.find_by_handle(params[:handle])
-  @user_timeline = @user.tweets.all.reverse
-  erb :timeline
+  @user_timeline = @user.tweets.order("time_of_tweet DESC")
+  erb :_user, layout: false
 end
 
 post '/tweets' do

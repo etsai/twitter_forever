@@ -1,7 +1,17 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('#twitter_finder').on('submit', function(e){
+    e.preventDefault();
+    $('.user_twitter').hide()
+// show image
+    $('.container').append("<div class='loader'><img src='/img/ajax-loader.gif' /></div>")
+    $.ajax({
+      url: this.action,
+      type: this.method,
+      data: $(this).serialize(),
+    })
+    .done(function(data) {
+      $('img').hide()
+      $('.container').append(data)
+    })
+  });
 });

@@ -1,0 +1,6 @@
+<% @user_timeline.each do |tweet| %>
+  <p><%= tweet.text %>
+    <strong><%= tweet.print_date %> <%= tweet.print_time %></strong>
+  </p>
+
+<% end %>

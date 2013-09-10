@@ -12,19 +12,19 @@ class TwitterUser < ActiveRecord::Base
   end
 
   def tweets_stale?
-    true if Time.now - self.tweets.last.updated_at > 900
+    true if Time.now - self.tweets.last.updated_at > avg_time_between_tweets
   end
 
   def avg_time_between_tweets
     times = []
-    last_ten = self.tweets[-10..-1]
+    last_ten = self.tweets.order("time_of_tweet ASC")
     p self.tweets[-10..-1]
     last_ten.each_with_index do |tweet, i|
       if (i - 1) > -1 
         times << (last_ten[i].time_of_tweet - last_ten[i-1].time_of_tweet)
       end
     end
-    (times.inject(:+))/9
+    (times.inject(:+))/times.length
   end
 
 
